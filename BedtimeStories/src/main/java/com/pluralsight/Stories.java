@@ -2,36 +2,53 @@ package com.pluralsight;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Stories {
     public static void main(String[] args) throws FileNotFoundException {
-        FileInputStream fis = new FileInputStream("goldilocks.txt");
-        Scanner scanner = new Scanner(fis);
 
-        boolean storyTeller = false;
-        while (storyTeller) {
+        //      storyReader("goldilocks.txt");
+        Scanner loop = new Scanner(System.in);
+
+        boolean tellingStories = true;
+        while (tellingStories) {
+
             System.out.println("""
-                    What story would you like to read?
+                    \nHello what story would you like to read?\n
                     1. Goldilocks
                     2. Hansel and Gretel
                     3. Mary had a little lamb
+                    4. Im all done time for bed
                     """);
-            int userInput = scanner.nextInt();
-            scanner.nextLine();
-            if (userInput == 1) {
-                try {
-                    while (scanner.hasNextLine()) {
-                        String input = scanner.nextLine();
-                        System.out.println(input);
-                    }
+            int user = loop.nextInt();
 
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+            if (user == 1)
+                storyReader("goldilocks.txt");
+            if (user == 2) {
+                storyReader("hansel_and_gretel.txt");
+            }
+            if (user == 3) {
+                storyReader("mary_had_a_little_lamb.txt");
+            }
+            if (user == 4) {
+                tellingStories = false;
             }
         }
 
     }
+
+    public static void storyReader(String fileName) throws FileNotFoundException {
+        FileInputStream fis = new FileInputStream(fileName);
+        Scanner scanner = new Scanner(fis);
+        while (scanner.hasNextLine()) {
+            String s = scanner.nextLine();
+            System.out.println(s);
+
+        }
+        scanner.close();
+
+    }
+
 }
+
+
