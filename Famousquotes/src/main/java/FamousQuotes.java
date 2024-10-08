@@ -23,8 +23,15 @@ public class FamousQuotes {
             try {
                 System.out.println("\nEnter a number 1 - 10 to select a quote: \n");
                 int answer = scanner.nextInt();
+                scanner.nextLine();
 
                 System.out.println(quotes[answer]);
+
+                System.out.println("To exit enter Y/N");
+                String exit = scanner.nextLine();
+                if (exit.equals("y")) {
+                    break; }
+
             } catch (Exception e) {
                 System.out.println("\nsorry that number was an invalid input try again: \n");
                 int answer = scanner.nextInt();
