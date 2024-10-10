@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
 
+        //to get user inputs for buffered reader and writer
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the name of the employees file: ");
@@ -15,7 +16,6 @@ public class Main {
         System.out.println("Enter the name of the payroll file that you would like to create: ");
         String payrollFile = scanner.nextLine();
 
-
         //made a fileReader and a bufferedReader
         FileReader employeeReader = new FileReader(employeesfile);
         BufferedReader bufReader = new BufferedReader(employeeReader);
@@ -23,7 +23,7 @@ public class Main {
 
         FileWriter employeeWriter = new FileWriter(payrollFile);
         BufferedWriter buffWriter = new BufferedWriter(employeeWriter);
-//
+
         //Created ArrayList for the Employees and then split the array into parts
         ArrayList<Employee> employeesL = new ArrayList<>();
 
@@ -41,6 +41,8 @@ public class Main {
         // added new employee to the ArrayList
         Employee e1 = new Employee(25, "Damian Jerez", 40, 20); //created a new employee
         employeesL.add(e1); // added new employee to class
+        Employee e2 = new Employee(26, "Jontez Snider", 60, 25);
+        employeesL.add(e2);
         for (Employee t: employeesL){ //used enhanced for loop to print out the array
             System.out.println(t);
             buffWriter.write( String.format("ID: %-10d" + "|" + "Name: %-20s" + "|" + "Pay: $%-20.2f\n", t.getEmployeeID(), t.getName(), t.getGrossPay()));

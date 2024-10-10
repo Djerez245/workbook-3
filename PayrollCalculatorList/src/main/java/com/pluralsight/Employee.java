@@ -9,7 +9,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return String.format( "EmployeeID: %-10d" + " Name: %-20s" + " Hours Worked: %-10.2f" + " Pay-Rate: $%10.2f per hour", employeeID, name, hoursWorked, payRate);
+        return String.format( "EmployeeID: %-10d" + " Name: %-20s" + " Hours Worked: %-10.2f" + " Pay-Rate: $%2.2f per hour", employeeID, name, hoursWorked, payRate);
 
 //        return "Employee{" +
 //                "employeeID=" + employeeID +
