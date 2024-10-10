@@ -1,18 +1,28 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
 
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the name of the employees file: ");
+        String employeesfile = scanner.nextLine();
+
+        System.out.println("Enter the name of the payroll file that you would like to create: ");
+        String payrollFile = scanner.nextLine();
+
 
         //made a fileReader and a bufferedReader
-        FileReader employeeReader = new FileReader("./src/main/resources/employees.csv");
+        FileReader employeeReader = new FileReader(employeesfile);
         BufferedReader bufReader = new BufferedReader(employeeReader);
         String input;
+
+        FileWriter employeeWriter = new FileWriter(payrollFile);
+        BufferedWriter buffWriter = new BufferedWriter(employeeWriter);
 //
         //Created ArrayList for the Employees and then split the array into parts
         ArrayList<Employee> employeesL = new ArrayList<>();
@@ -33,7 +43,16 @@ public class Main {
         employeesL.add(e1); // added new employee to class
         for (Employee t: employeesL){ //used enhanced for loop to print out the array
             System.out.println(t);
+            buffWriter.write( String.format("ID: %-10d" + "|" + "Name: %-20s" + "|" + "Pay: $%-20.2f\n", t.getEmployeeID(), t.getName(), t.getGrossPay()));
         }
+        buffWriter.close();
+
+
+
+
+
+
+
 
 
     }

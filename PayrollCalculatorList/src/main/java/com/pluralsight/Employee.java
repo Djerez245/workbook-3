@@ -7,10 +7,9 @@ public class Employee {
     double payRate;
 
 
-
     @Override
     public String toString() {
-        return String.format( "EmployeeID: %d" + " Name: %s" + " Hours Worked: %.2f" + " Pay-Rate: $%.2f per hour", employeeID, name, hoursWorked, payRate);
+        return String.format( "EmployeeID: %-10d" + " Name: %-20s" + " Hours Worked: %-10.2f" + " Pay-Rate: $%10.2f per hour", employeeID, name, hoursWorked, payRate);
 
 //        return "Employee{" +
 //                "employeeID=" + employeeID +
@@ -41,6 +40,8 @@ public class Employee {
     public double getPayRate() {
         return payRate;
     }
+    public double getGrossPay(){return hoursWorked * payRate;}
+
 
     public Employee(int employeeID, String name, double hoursWorked, double payRate) {
         this.employeeID = employeeID;
@@ -51,6 +52,8 @@ public class Employee {
 
     public void setPayRate(double payRate) {
         this.payRate = payRate;
+
     }
+
 }
 
