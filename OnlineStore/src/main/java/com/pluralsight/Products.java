@@ -1,16 +1,24 @@
 package com.pluralsight;
 
 public class Products {
-String sku;
-String productName;
-double Price;
-String department;
+private String sku;
+private String productName;
+private double Price;
+private String department;
+private String reset = "\u001B[0m";
+private String red = "\u001B[0;31m";
+private String green = "\u001B[0;32m";
+private String blue = "\u001B[0;34m";
 
     public Products(String sku, String productName, double price, String department) {
         this.sku = sku;
         this.productName = productName;
         Price = price;
         this.department = department;
+        this.reset = reset;
+        this.green = green;
+        this.red = red;
+        this.blue = blue;
     }
 
 
@@ -41,7 +49,7 @@ String department;
 
     @Override
     public String toString() {
-        return String.format("SKU: %-7s  Productname: %-35s   Price: $%-7.2f    Department: %s", getSku(), getProductName(), getPrice(), getDepartment());
+        return String.format(green + "SKU: %-7s" +reset + green + "Productname: %-35s" + green + "Price: $%-7.2f" + reset + green + "Department: %s" + reset, getSku(), getProductName(), getPrice(), getDepartment());
 //        return "com.pluralsight.Products{" +
 //                "sku='" + sku + '\'' +
 //                ", productName='" + productName + '\'' +

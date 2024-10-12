@@ -1,6 +1,8 @@
 package com.pluralsight;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,6 +10,7 @@ public class Store {
 
     static ArrayList<Products> productsArray = new ArrayList<>();
     static ArrayList<Products> shoppingcart = new ArrayList<>();
+    private static Scanner scanner;
 
     public Store(ArrayList<Products> productsArray, ArrayList<Products> shoppingcart) {
         this.productsArray = productsArray;
@@ -31,6 +34,51 @@ public class Store {
             productsArray.add(fullproduct);
         }
     }
+    public static double toGetChange(){
+        scanner = new Scanner(System.in);
+        double total =0.0;
+        for( Products products : shoppingcart){
+            total += products.getPrice();
+        }
+        System.out.printf("you're total is: $%.2f\n", total);
+        System.out.println("how much would you like to pay? ");
+        double pay = scanner.nextDouble();
+        double change = pay - total;
+        if (change > 0){
+            System.out.printf("Your payment was successful! your change is: $%.2f\n", change);
+        }
+        else {
+            System.out.printf("Sorry! I need more money! you  are short $%.2f", -change);
+        }
+        return change;
+    }
+
+    public static void printReceipt() throws IOException {
+        FileWriter writer = new FileWriter("receipt.csv");
+        BufferedWriter bufferedWriter = new BufferedWriter(writer);
+        LocalDateTime purchaseTime = LocalDateTime.now();
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("E, MMM dd, yyyy  HH:mm:ss");
+        double total =0.0;
+        for( Products products : shoppingcart){
+            total += products.getPrice();
+        }
+
+        System.out.println("your total is: " + total);
+        double change = toGetChange();
+        String printOut = String.format ("""
+                ==============================================
+                              Java Store receipt
+                ==============================================
+         %s
+         Total: $%.2f
+         Time of purchase: %s
+         You paid: %.2f
+         Your change is: $%.2f
+        """, shoppingcart, total, purchaseTime.format(fmt), (total + change), change);
+        bufferedWriter.write(printOut);
+        bufferedWriter.close();
+    }
+
 
     public static void searchAddItem(){
         System.out.printf("""
@@ -53,6 +101,7 @@ public class Store {
         }
     }
 
+
     public static void printPrompt(String p) {
         System.out.println(p);
     }
@@ -63,7 +112,7 @@ public class Store {
     }
 
 
-    private static String mainMenuText = """
+    private static String mainMenuText =  """
                     
                     ==============================================
                              Welcome to Java online Store!
@@ -72,12 +121,14 @@ public class Store {
                     B) Display Cart
                     C) EXIT - Leave the store
                     """;
+    private static String displayMenuTitleText = """
+                                                 ==========================================
+                                                               Display Items
+                                                 ==========================================""";
 
     private static String displayMenuText =
       """
-                                ==========================================
-                                              Display Items
-                                ==========================================
+                             
                                 1. To search
                                 2. add a product
                                 3. go back to home page
@@ -95,7 +146,9 @@ public class Store {
                                 3. go back to home page
                                 """;
 
-    private static Scanner scanner;
+    private static String addProductToCart ="\nEnter the product name that you would like to add to the cart: ";
+
+
 
 
     public static void main(String[] args) throws IOException {
@@ -114,12 +167,12 @@ public class Store {
                 case "a":
                     boolean displayPage = true;
                     while (displayPage) {
+                        printPrompt(displayMenuTitleText);
                         for (Products product : productsArray) {
                             System.out.println(product);
                         }
 
                         printPrompt( displayMenuText );
-
                         int userInput2 = scanner.nextInt();
                         scanner.nextLine();
                         if (userInput2 == 1) {
@@ -127,7 +180,7 @@ public class Store {
                         }
 
                         if (userInput2 == 2) {
-                            System.out.println("\nEnter the product name that you would like to add to the cart: ");
+                            printPrompt(addProductToCart);
                             String cartInput = scanner.nextLine();
                             for (Products products : productsArray) {
                                 if (cartInput.toLowerCase().equals(products.getProductName().toLowerCase())) {
@@ -141,6 +194,8 @@ public class Store {
                     }
                     break;
                 case "b":
+                    boolean cart = true;
+                    while (cart)
                     if (shoppingcart.isEmpty()) {
                         System.out.println("\nYour cart is empty\n");
                     }
@@ -151,9 +206,13 @@ public class Store {
                         }
                         printPrompt(getShoppingValuesText);
                         int cartResponse = scanner.nextInt();
-                        if (cartResponse == 1) ;
-
-
+                        if (cartResponse == 1){
+                            toGetChange();
+                            printReceipt();
+                            System.out.println("You,re receipt has been printed\n");
+                            System.out.println("come back again soon!");
+                            store = false;
+                        }
                         if (cartResponse == 2) {
                             scanner.nextLine();
                             System.out.println("Enter the name or SKU of the item that you would like to remove");
@@ -165,6 +224,10 @@ public class Store {
                                 }
                             }
                         }
+                        if (cartResponse == 3){
+                            cart = false;
+                        }
+                        break;
                     }
                     break;
                 case "c":
