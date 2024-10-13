@@ -198,6 +198,7 @@ public class Store {
                     while (cart)
                     if (shoppingcart.isEmpty()) {
                         System.out.println("\nYour cart is empty\n");
+                        cart = false;
                     }
                     else {
                         printPrompt(shoppingCartText);
