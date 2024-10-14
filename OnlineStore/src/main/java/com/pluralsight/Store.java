@@ -30,8 +30,8 @@ public class Store {
             String productName = values[1];
             double price = Double.parseDouble(values[2]);
             String department = values[3];
-            Products fullproduct = new Products(sku, productName, price, department);
-            productsArray.add(fullproduct);
+            Products fullProduct = new Products(sku, productName, price, department);
+            productsArray.add(fullProduct);
         }
     }
     public static double toGetChange(){
@@ -170,14 +170,12 @@ public class Store {
                         for (Products product : productsArray) {
                             System.out.println(product);
                         }
-
                         printPrompt( displayMenuText );
                         int userInput2 = scanner.nextInt();
                         scanner.nextLine();
                         if (userInput2 == 1) {
                             searchAddItem();
                         }
-
                         if (userInput2 == 2) {
                             printPrompt(addProductToCart);
                             String cartInput = scanner.nextLine();
