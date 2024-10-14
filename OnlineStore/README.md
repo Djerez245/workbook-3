@@ -14,7 +14,9 @@ like to add to your cart and once you enter the product it will instantly add it
 keyboard.
 ![display](images/screenshot 2024-10-12 224428.png)
 
-### Shopping cart screen 
+### Shopping cart screen
+
+
 ![shoppingCart](images/screenshot 2024-10-12 224644.png)
 
 on the screen you will be able to view you're whole shopping cart. You can choose to remove an item if you so please.

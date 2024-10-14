@@ -101,7 +101,6 @@ public class Store {
         }
     }
 
-
     public static void printPrompt(String p) {
         System.out.println(p);
     }
@@ -114,41 +113,41 @@ public class Store {
 
     private static String mainMenuText =  """
                     
-                    ==============================================
-                             Welcome to Java online Store!
-                    ==============================================
-                    A) Display Products
-                    B) Display Cart
-                    C) EXIT - Leave the store
-                    """;
-    private static String displayMenuTitleText = """
-                                                 ==========================================
-                                                               Display Items
-                                                 ==========================================""";
+     ==============================================
+             Welcome to Java online Store!
+     ==============================================
+     A) Display Products
+     B) Display Cart
+     C) EXIT - Leave the store
+     """;
+    private static String displayMenuTitleText =
+      """
+                                        
+      ==========================================
+                  Display Items
+     ==========================================""";
 
     private static String displayMenuText =
       """
-                             
-                                1. To search
-                                2. add a product
-                                3. go back to home page
-                               """;
+     
+     1. To search
+     2. add a product
+     3. go back to home page
+     """;
     private static String shoppingCartText = """
-                                ==========================================
-                                              SHOPPING CART
-                                ==========================================
-                                """;
+      ==========================================
+                   SHOPPING CART
+     ==========================================
+     """;
     private static String getShoppingValuesText = """
                                 
                                 
-                                1. Check-out
-                                2. remove product
-                                3. go back to home page
-                                """;
+    1. Check-out
+    2. remove product
+    3. go back to home page
+    """;
 
     private static String addProductToCart ="\nEnter the product name that you would like to add to the cart: ";
-
-
 
 
     public static void main(String[] args) throws IOException {
